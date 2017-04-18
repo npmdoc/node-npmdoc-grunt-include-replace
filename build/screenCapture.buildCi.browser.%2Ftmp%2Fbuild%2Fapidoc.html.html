@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/alanshaw/grunt-include-replace"
-
-    >grunt-include-replace (v5.0.0)</a>
+    <a href="https://github.com/alanshaw/grunt-include-replace">grunt-include-replace (v5.0.0)</a>
 </h1>
 <h4>Grunt task to include files and replace variables. Allows for parameterised includes.</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.grunt-include-replace">module grunt-include-replace</a><ol>
 
@@ -86,19 +79,19 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">grunt-include-replace = function (grunt) {
-  var path = require(&#x27;path&#x27;)
+  var path = require('path')
 
-  grunt.registerMultiTask(&#x27;includereplace&#x27;, &#x27;Include files and replace variables&#x27;, function () {
+  grunt.registerMultiTask('includereplace', 'Include files and replace variables', function () {
     var options = this.options({
-      prefix: &#x27;@@&#x27;,
-      suffix: &#x27;&#x27;,
+      prefix: '@@',
+      suffix: '',
       globals: {},
-      includesDir: &#x27;&#x27;,
-      docroot: &#x27;.&#x27;,
-      encoding: &#x27;utf-8&#x27;
+      includesDir: '',
+      docroot: '.',
+      encoding: 'utf-8'
     })
 
-    grunt.log.debug(&#x27;Options&#x27;, options)
+    grunt.log.debug('Options', options)
 
     // Preset default encoding as early as possible
     grunt.file.defaultEncoding = options.encoding
@@ -135,7 +128,7 @@
           localVars[varName] = JSON.stringify(localVars[varName])
         }
 
-        varRegExps[varName] = varRegExps[varName] || new RegExp(options.prefix + varName + options.suffix, &#x27;g&#x27;)
+        varRegExps[varName] = varRegExps[varName] || new RegExp(options.prefix + varName + options.suffix, 'g')
 
         contents = contents.replace(varRegExps[varName], localVars[varName])
       })
@@ -143,7 +136,7 @@
       // Replace global variables
       globalVarNames.forEach(function (globalVarName) {
         globalVarRegExps[globalVarName] = globalVarRegExps[globalVarName] || new RegExp(options.prefix + globalVarName + options
-.suffix, &#x27;g&#x27;)
+.suffix, 'g')
 
         contents = contents.replace(globalVarRegExps[globalVarName], globalVars[globalVarName])
       })
@@ -151,7 +144,7 @@
       return contents
     }
 
-    var includeRegExp = new RegExp(options.prefix + &#x27;include\\(\\s*[&#x22;\&#x27;](.*?)[&#x22;\&#x27;](,\\s*({[\\s\\S]*?})){0,1}\\s*\\)&#x27; + options.suffix
+    var includeRegExp = new RegExp(options.prefix + 'include\\(\\s*["\'](.*?)["\'](,\\s*({[\\s\\S]*?})){0,1}\\s*\\)' + options.suffix
 )
 
     function include (contents, workingDir) {
@@ -166,24 +159,24 @@
 
       function getIncludeContents (includePath, localVars) {
         var files = grunt.file.expand(includePath)
-        var includeContents = &#x27;&#x27;
+        var includeContents = ''
 
         // If files is not an array of at least one element then bad
         if (!files.length) {
-          grunt.log.warn(&#x27;Include file(s) not found&#x27;, includePath)
+          grunt.log.warn('Include file(s) not found', includePath)
         }
 
         files.forEach(function (filePath, index) {
           includeContents += grunt.file.read(filePath)
           // break a line for every file, except for the last one
-          includeContents += index !== files.length - 1 ? &#x27;\n&#x27; : &#x27;&#x27;
+          includeContents += index !== files.length - 1 ? '\n' : ''
 
           // Make replacements
           includeContents = replace(includeContents, localVars)
 
           // Process includes
           includeContents = include(includeContents, path.dirname(filePath))
-          if (options.processIncludeContents &#x26;&#x26; typeof options.processIncludeContents === &#x27;function&#x27;) {
+          if (options.processIncludeContents &amp;&amp; typeof options.processIncludeContents === 'function') {
             includeContents = options.processIncludeContents(includeContents, localVars, filePath)
           }
         })
@@ -200,7 +193,7 @@
           includePath = path.resolve(path.join((options.includesDir ? options.includesDir : workingDir), includePath))
         } else {
           if (options.includesDir) {
-            grunt.log.error(&#x27;includesDir works only with relative paths. Could not apply includesDir to &#x27; + includePath)
+            grunt.log.error('includesDir works only with relative paths. Could not apply includesDir to ' + includePath)
           }
           includePath = path.resolve(incl ...</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -215,3 +208,4 @@
     ]
 </div>
 </div>
+</body></html>

@@ -61,12 +61,151 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.grunt-include-replace">module grunt-include-replace</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.grunt-include-replace.grunt-include-replace">
+            function <span class="apidocSignatureSpan"></span>grunt-include-replace
+            <span class="apidocSignatureSpan">(grunt)</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.grunt-include-replace" id="apidoc.module.grunt-include-replace">module grunt-include-replace</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.grunt-include-replace.grunt-include-replace" id="apidoc.element.grunt-include-replace.grunt-include-replace">
+        function <span class="apidocSignatureSpan"></span>grunt-include-replace
+        <span class="apidocSignatureSpan">(grunt)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">grunt-include-replace = function (grunt) {
+  var path = require(&#x27;path&#x27;)
+
+  grunt.registerMultiTask(&#x27;includereplace&#x27;, &#x27;Include files and replace variables&#x27;, function () {
+    var options = this.options({
+      prefix: &#x27;@@&#x27;,
+      suffix: &#x27;&#x27;,
+      globals: {},
+      includesDir: &#x27;&#x27;,
+      docroot: &#x27;.&#x27;,
+      encoding: &#x27;utf-8&#x27;
+    })
+
+    grunt.log.debug(&#x27;Options&#x27;, options)
+
+    // Preset default encoding as early as possible
+    grunt.file.defaultEncoding = options.encoding
+
+    // Variables available in ALL files
+    var globalVars = options.globals
+
+    // Names of our variables
+    var globalVarNames = Object.keys(globalVars)
+
+    globalVarNames.forEach(function (globalVarName) {
+      if (isString(globalVars[globalVarName])) {
+        globalVars[globalVarName] = globalVars[globalVarName]
+      } else {
+        globalVars[globalVarName] = JSON.stringify(globalVars[globalVarName])
+      }
+    })
+
+    // Cached variable regular expressions
+    var globalVarRegExps = {}
+
+    function replace (contents, localVars) {
+      localVars = localVars || {}
+
+      var varNames = Object.keys(localVars)
+      var varRegExps = {}
+
+      // Replace local vars
+      varNames.forEach(function (varName) {
+        // Process lo-dash templates (for strings) in global variables and JSON.stringify the rest
+        if (isString(localVars[varName])) {
+          localVars[varName] = grunt.template.process(localVars[varName])
+        } else {
+          localVars[varName] = JSON.stringify(localVars[varName])
+        }
+
+        varRegExps[varName] = varRegExps[varName] || new RegExp(options.prefix + varName + options.suffix, &#x27;g&#x27;)
+
+        contents = contents.replace(varRegExps[varName], localVars[varName])
+      })
+
+      // Replace global variables
+      globalVarNames.forEach(function (globalVarName) {
+        globalVarRegExps[globalVarName] = globalVarRegExps[globalVarName] || new RegExp(options.prefix + globalVarName + options
+.suffix, &#x27;g&#x27;)
+
+        contents = contents.replace(globalVarRegExps[globalVarName], globalVars[globalVarName])
+      })
+
+      return contents
+    }
+
+    var includeRegExp = new RegExp(options.prefix + &#x27;include\\(\\s*[&#x22;\&#x27;](.*?)[&#x22;\&#x27;](,\\s*({[\\s\\S]*?})){0,1}\\s*\\)&#x27; + options.suffix
+)
+
+    function include (contents, workingDir) {
+      var matches = includeRegExp.exec(contents)
+
+      // Create a function that can be passed to String.replace as the second arg
+      function createReplaceFn (replacement) {
+        return function () {
+          return replacement
+        }
+      }
+
+      function getIncludeContents (includePath, localVars) {
+        var files = grunt.file.expand(includePath)
+        var includeContents = &#x27;&#x27;
+
+        // If files is not an array of at least one element then bad
+        if (!files.length) {
+          grunt.log.warn(&#x27;Include file(s) not found&#x27;, includePath)
+        }
+
+        files.forEach(function (filePath, index) {
+          includeContents += grunt.file.read(filePath)
+          // break a line for every file, except for the last one
+          includeContents += index !== files.length - 1 ? &#x27;\n&#x27; : &#x27;&#x27;
+
+          // Make replacements
+          includeContents = replace(includeContents, localVars)
+
+          // Process includes
+          includeContents = include(includeContents, path.dirname(filePath))
+          if (options.processIncludeContents &#x26;&#x26; typeof options.processIncludeContents === &#x27;function&#x27;) {
+            includeContents = options.processIncludeContents(includeContents, localVars, filePath)
+          }
+        })
+
+        return includeContents
+      }
+
+      while (matches) {
+        var match = matches[0]
+        var includePath = matches[1]
+        var localVars = matches[3] ? JSON.parse(matches[3]) : {}
+
+        if (!grunt.file.isPathAbsolute(includePath)) {
+          includePath = path.resolve(path.join((options.includesDir ? options.includesDir : workingDir), includePath))
+        } else {
+          if (options.includesDir) {
+            grunt.log.error(&#x27;includesDir works only with relative paths. Could not apply includesDir to &#x27; + includePath)
+          }
+          includePath = path.resolve(incl ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 

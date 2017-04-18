@@ -1,9 +1,14 @@
-# api documentation for  [grunt-include-replace (v5.0.0)](https://github.com/alanshaw/grunt-include-replace)  [![npm package](https://img.shields.io/npm/v/npmdoc-grunt-include-replace.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-grunt-include-replace) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-grunt-include-replace.svg)](https://travis-ci.org/npmdoc/node-npmdoc-grunt-include-replace)
+# npmdoc-grunt-include-replace
+
+#### api documentation for  [grunt-include-replace (v5.0.0)](https://github.com/alanshaw/grunt-include-replace)  [![npm package](https://img.shields.io/npm/v/npmdoc-grunt-include-replace.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-grunt-include-replace) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-grunt-include-replace.svg)](https://travis-ci.org/npmdoc/node-npmdoc-grunt-include-replace)
+
 #### Grunt task to include files and replace variables. Allows for parameterised includes.
 
-[![NPM](https://nodei.co/npm/grunt-include-replace.png?downloads=true)](https://www.npmjs.com/package/grunt-include-replace)
+[![NPM](https://nodei.co/npm/grunt-include-replace.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/grunt-include-replace)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-grunt-include-replace/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-grunt-include-replace_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-grunt-include-replace/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-grunt-include-replace/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-grunt-include-replace/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-grunt-include-replace/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-grunt-include-replace/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-grunt-include-replace/build/screenCapture.npmPackageListing.svg)
 
@@ -17,8 +22,7 @@
 
 {
     "author": {
-        "name": "Alan Shaw",
-        "email": "alan138@gmail.com"
+        "name": "Alan Shaw"
     },
     "bugs": {
         "url": "https://github.com/alanshaw/grunt-include-replace/issues"
@@ -58,8 +62,7 @@
     "main": "tasks/includereplace.js",
     "maintainers": [
         {
-            "name": "alanshaw",
-            "email": "alan138@gmail.com"
+            "name": "alanshaw"
         }
     ],
     "name": "grunt-include-replace",
@@ -67,7 +70,6 @@
     "peerDependencies": {
         "grunt": "~0.4.4 || ^1.0.1"
     },
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/alanshaw/grunt-include-replace.git"
@@ -85,16 +87,6 @@
     "version": "5.0.0"
 }
 ```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module grunt-include-replace](#apidoc.module.grunt-include-replace)
-
-
-
-# <a name="apidoc.module.grunt-include-replace"></a>[module grunt-include-replace](#apidoc.module.grunt-include-replace)
 
 
 
